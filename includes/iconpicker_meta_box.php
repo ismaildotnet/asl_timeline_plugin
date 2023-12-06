@@ -21,6 +21,7 @@ function render_timeline_custom_meta_box($post) {
     $timeline_icon = get_post_meta($post->ID, 'timeline_icon', true);
     $all_dashicons = get_all_dashicons();
     ?>
+
 	<div class="dashicon-picker-aria">
     <label id="togglePicker" for="timeline_icon"><span class="dashicons <?php echo esc_attr($timeline_icon); ?>"></label>
     <input name="timeline_icon" id="timeline_icon" type="hidden" value="<?php echo esc_attr($timeline_icon)?>">
@@ -52,7 +53,6 @@ function get_all_dashicons() {
 
     // Get the content of the Dashicons stylesheet
     $dashicons_css = file_get_contents(admin_url('load-styles.php?c=0&dir=ltr&load=dashicons,admin-bar,buttons,media-views,wp-admin,wp-auth-check&ver=' . get_bloginfo('version')));
-
     // Extract Dashicons classes from the stylesheet
     preg_match_all('/\.(dashicons-[a-z0-9-]+)/', $dashicons_css, $matches);
 

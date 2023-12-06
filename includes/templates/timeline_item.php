@@ -5,7 +5,7 @@ $timeline_date = get_post_meta( $post_id, 'timeline_date', true);
 $dateTime = new DateTime($timeline_date);
 $formattedDate = $dateTime->format('F j, Y');
 ?>
-<div class="timeline_item_area">
+<div class="timeline_item_area animate__animated">
         <div class="timeline_icon">
             <span class="dashicons <?php echo esc_attr($timeline_icon)?>"></span>
         </div>

@@ -9,6 +9,7 @@ add_action('admin_enqueue_scripts', function() {
     // wp_enqueue_style('dashicons');
     wp_enqueue_script('timeline-color-picker', plugin_dir_url(__DIR__) . '/admin/js/color_picker.js', array('wp-color-picker'), false, true);
     wp_enqueue_style('timeline-editor-style', plugin_dir_url(__DIR__) . '/admin/css/timeline_editor.css');
+    wp_enqueue_style('timeline-admin-item-style', plugin_dir_url(__DIR__) . '/assets/style.css');
 
 if ($pagenow === 'edit.php' &&
 isset($_GET['post_type']) && $_GET['post_type'] === 'timeline' &&

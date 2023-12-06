@@ -19,16 +19,22 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 define('TIMELINE_PLUGIN_DIR', __DIR__);
 define('TIMELINE_PLUGIN_PATH', __FILE__);
-define('TIMELINE_MENU_ICON_PATH',plugin_dir_url(__FILE__) .'/assets/images/menu.png');
+define('TIMELINE_MENU_ICON_PATH',plugin_dir_url(__FILE__) .'/assets/images/menu-icon.png');
 
 	 require_once TIMELINE_PLUGIN_DIR . '/includes/setup.php';
 	 require_once TIMELINE_PLUGIN_DIR . '/includes/settings.php';
 	 require_once TIMELINE_PLUGIN_DIR . '/includes/enquee.php';
 	 require_once TIMELINE_PLUGIN_DIR . '/includes/widget.php';
 	 require_once TIMELINE_PLUGIN_DIR . '/includes/shortcode.php';
+	// require_once TIMELINE_PLUGIN_DIR . '/blocks/main.php';
 
 
 // Define Global Veriable 
-
-
+function timelinealt_timelinealt_block_init() {
+	register_block_type( __DIR__ . '/blocks' );
+}
+add_action( 'init', 'timelinealt_timelinealt_block_init' );
+add_action('enqueue_block_assets', function (): void {
+    wp_enqueue_style('dashicons');
+});
 ?>

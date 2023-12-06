@@ -21,7 +21,7 @@ function timeline_shortcode_function() {
    
         <?php
         // Include the header template
-        include(plugin_dir_path(__FILE__) . '/templates/timeline_header.php');
+       // include(plugin_dir_path(__FILE__) . '/templates/timeline_header.php');
         ?>
  <div class="timeline_aria">
         <div class="timeline_items">

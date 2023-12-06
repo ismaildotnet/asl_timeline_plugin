@@ -36,6 +36,7 @@
     width: 100%;
 }
 .wp-menu-image > img{
-width: 100%;
-overflow: hidden;
+    width: 27px;
+    overflow: hidden;
+    padding: 4px 1px !important
 }
