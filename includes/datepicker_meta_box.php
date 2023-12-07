@@ -1,18 +1,44 @@
 <?php
-function add_custom_metabox() {
+/**
+ * This date picker box for custom post type Timeline
+ *
+ * PHP version 7.4.1
+ *
+ * @category Basefile
+ * @package  General
+ * @author   Alchemy Software Limited <wordpress@alchemy-bd.com>
+ * @license  GPL v2 or later
+ * @link     alchemy-bd.com
+ */
+
+/**
+ * This function will add custom meta as date picker to TImeline
+ *
+ * @return null
+ */
+function Add_Custom_metabox()
+{
     add_meta_box(
         'timeline_date_metabox',
         'Timeline Date',
-        'render_timeline_date_metabox',
-        _timeline_post_type,  // You can change this to 'page' or a custom post type
+        'Render_Iimeline_Date_metabox',
+        _TIMELINE_POST_TYPE, // You can change this to 'page' or a custom post type
         'normal',
         'high'
     );
 }
 
-add_action('add_meta_boxes', 'add_custom_metabox');
+add_action('add_meta_boxes', 'Add_Custom_metabox');
 
-function render_timeline_date_metabox($post) {
+/**
+ * This function will add custom meta as date picker to TImeline
+ *
+ * @param mixed $post Description of the $post parameter.
+ *
+ * @return void
+ */
+function Render_Iimeline_Date_metabox($post)
+{
     // Retrieve the current value of the date from post meta
     $timeline_date = get_post_meta($post->ID, 'timeline_date', true);
     ?>
@@ -20,12 +46,23 @@ function render_timeline_date_metabox($post) {
 
     <?php
 }
-
-function save_timeline_date_metabox($post_id) {
-    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) return;
+/**
+ * This function will save custom meta as date picker to TImeline
+ *
+ * @param mixed $post_id mixed $post Description of the $post parameter.
+ *
+ * @return void
+ */
+function Save_Timeline_Date_metabox($post_id)
+{
+    if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+        return;
+    }
 
     // Check if the user has permissions to save data
-    if (!current_user_can('edit_post', $post_id)) return;
+    if (!current_user_can('edit_post', $post_id)) {
+        return;
+    }
 
     // Save the custom date value
     if (isset($_POST['timeline_date'])) {
@@ -33,6 +70,6 @@ function save_timeline_date_metabox($post_id) {
     }
 }
 
-add_action('save_post', 'save_timeline_date_metabox');
+add_action('save_post', 'Save_Timeline_Date_metabox');
 
 ?>
