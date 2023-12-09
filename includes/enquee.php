@@ -8,7 +8,7 @@
  * @package  General
  * @author   Alchemy Software Limited <wordpress@alchemy-bd.com>
  * @license  GPL v2 or later
- * @link     alchemy-bd.com
+ * @link     wordpress.org
  */
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
@@ -29,7 +29,6 @@ function Enqueue_Admin_Styles_And_scripts()
 
     if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'timeline' && isset($_GET['page']) && $_GET['page'] === 'timeline-settings') {
         wp_enqueue_style('timeline-option-style', plugin_dir_url(__DIR__) . '/admin/css/timeline_style.css');
-        wp_enqueue_script('timeline-option-script', plugin_dir_url(__DIR__) . '/admin/js/timeline_script.js');
     }
 }
 add_action('admin_enqueue_scripts', 'Enqueue_Admin_Styles_And_scripts');

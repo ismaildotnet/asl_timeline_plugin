@@ -10,9 +10,9 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  *
- * Plugin Name:       Awesome Timeline
- * Plugin URI:        https://wordpress.org/plugins/awesome-timeline/
- * Description:       Manage a slider for your site.
+ * Plugin Name:       Awesome Timeline with block
+ * Plugin URI:        https://wordpress.org/plugins/awesome-timeline-with-block/
+ * Description:       Explore the versatility of Awesome Timeline with Gutenberg block, a WordPress plugin designed to streamline timeline management. Seamlessly integrate with the WordPress block editor, creating dynamic timelines that beautifully display key events or project milestones. Enjoy the convenience of using Awesome Timeline as a Gutenberg block anywhere on your website, combining intuitive editing with impactful visual storytelling. Elevate your content creation with this powerful plugin, delivering an immersive timeline experience within a user-friendly environment.
  * Version:           1.0.0
  * Requires at least: 5.2
  * Requires PHP:      7.2

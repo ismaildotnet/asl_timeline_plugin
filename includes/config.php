@@ -8,7 +8,7 @@
  * @package  General
  * @author   Alchemy Software Limited <wordpress@alchemy-bd.com>
  * @license  GPL v2 or later
- * @link     alchemy-bd.com
+ * @link     wordpress.org
  */
 $allvariables = array(
     "timeline_border_color",

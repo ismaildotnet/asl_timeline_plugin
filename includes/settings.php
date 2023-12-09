@@ -52,7 +52,7 @@ function Timeline_Plugin_Settings_page()
             <?php settings_errors();?>
         <form method="post" action="options.php">
             <?php
-              settings_fields('timeline_plugin_settings_group_' . $current_tab);
+              settings_fields('timeline_s_' . $current_tab);
              echo '<div class="timeline-settings-container">';
               do_settings_sections('timeline-settings-' . $current_tab);
              echo '</div>';
@@ -65,7 +65,7 @@ function Timeline_Plugin_Settings_page()
         endif;?>
         <div class="clearfix">
             <hr>
-            Developed by  <a href="https://alchemy-bd.com" title="Developed by Alchemy Software Limited">Alchemy Software Limited</a>
+Developed by<a href="#" title="Alchemy Software Limited">Alchemy Software Ltd.</a>
         </div>
     </div>
     <?php
@@ -80,43 +80,38 @@ add_action('admin_init', 'Register_Plugin_settings');
 function Register_Plugin_settings()
 {
     // Specify the second argument as the option group, which should match the argument in settings_fields
-    register_setting('timeline_plugin_settings_group_color', 'timeline_border_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_top_border_color');
+    register_setting('timeline_s_color', 'timeline_border_color');
+    register_setting('timeline_s_color', 'timeline_top_border_color');
 
     //icon color
-    register_setting('timeline_plugin_settings_group_color', 'timeline_odd_item_icon_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_odd_item_icon_background_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_even_item_icon_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_even_item_icon_background_color');
+    register_setting('timeline_s_color', 'timeline_odd_item_icon_color');
+    register_setting('timeline_s_color', 'timeline_odd_item_icon_background_color');
+    register_setting('timeline_s_color', 'timeline_even_item_icon_color');
+    register_setting('timeline_s_color', 'timeline_even_item_icon_background_color');
 
     //item odd title
-    register_setting('timeline_plugin_settings_group_color', 'timeline_odd_item_title_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_even_item_title_color');
+    register_setting('timeline_s_color', 'timeline_odd_item_title_color');
+    register_setting('timeline_s_color', 'timeline_even_item_title_color');
 
     //item odd color
-    register_setting('timeline_plugin_settings_group_color', 'timeline_odd_item_text_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_odd_item_background_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_odd_item_border_color');
+    register_setting('timeline_s_color', 'timeline_odd_item_text_color');
+    register_setting('timeline_s_color', 'timeline_odd_item_background_color');
+    register_setting('timeline_s_color', 'timeline_odd_item_border_color');
 
     //item even color
-    register_setting('timeline_plugin_settings_group_color', 'timeline_even_item_text_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_even_item_background_color');
-    register_setting('timeline_plugin_settings_group_color', 'timeline_even_item_border_color');
-    // Boolean Settings
-    // register_setting('timeline_plugin_settings_group_boolean', 'show_category_before_timeline_item');
-    //  register_setting('timeline_plugin_settings_group_boolean', 'show_number_as_pagination');
-    //  register_setting('timeline_plugin_settings_group_boolean', 'enable_details_view_for_timeline_item');
-    //  register_setting('timeline_plugin_settings_group_boolean', 'show_pagination_after_maximum_item_shown');
+    register_setting('timeline_s_color', 'timeline_even_item_text_color');
+    register_setting('timeline_s_color', 'timeline_even_item_background_color');
+    register_setting('timeline_s_color', 'timeline_even_item_border_color');
 
-    register_setting('timeline_plugin_settings_group_animation', 'timeline_odd_item_animation_name');
-    register_setting('timeline_plugin_settings_group_animation', 'timeline_even_item_animation_name');
-    register_setting('timeline_plugin_settings_group_animation', 'timeline_item_animate_duration');
-    register_setting('timeline_plugin_settings_group_animation', 'timeline_item_animate_delay');
-    register_setting('timeline_plugin_settings_group_animation', 'timeline_item_animate_repeat');
+    register_setting('timeline_s_animation', 'timeline_odd_item_animation_name');
+    register_setting('timeline_s_animation', 'timeline_even_item_animation_name');
+    register_setting('timeline_s_animation', 'timeline_item_animate_duration');
+    register_setting('timeline_s_animation', 'timeline_item_animate_delay');
+    register_setting('timeline_s_animation', 'timeline_item_animate_repeat');
 
-    register_setting('timeline_plugin_settings_group_other', 'timeline_maximum_item');
-    register_setting('timeline_plugin_settings_group_other', 'timeline_item_title_font_size');
-    register_setting('timeline_plugin_settings_group_other', 'show_timeline_ascending_by_timeline_date');
+    register_setting('timeline_s_other', 'timeline_maximum_item');
+    register_setting('timeline_s_other', 'timeline_item_title_font_size');
+    register_setting('timeline_s_other', 'show_timeline_ascending_by_timeline_date');
 
 }
 
