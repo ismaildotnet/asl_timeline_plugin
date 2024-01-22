@@ -10,6 +10,10 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
+if (!defined('ABSPATH')) {
+        exit; // Exit if accessed directly
+    }
+
 $post_id = get_the_ID();
 $timeline_icon = get_post_meta($post_id, 'timeline_icon', true);
 $timeline_date = get_post_meta($post_id, 'timeline_date', true);
@@ -28,7 +32,7 @@ $formattedDate = $dateTime->format('F j, Y');
                         <?php echo the_post_thumbnail() ?>
                </div>
                 <div class="timeline_title">
-                   <?php echo the_title(); ?>
+                   <?php echo esc_html( the_title()); ?>
                 </div>
                <div class="timeline_content">
                         <p><?php the_content();?></p>

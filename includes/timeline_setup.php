@@ -10,6 +10,7 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
+namespace atwb\setup;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -48,9 +49,9 @@ function Timeline_Setup_Post_type()
     );
     register_post_type(_TIMELINE_POST_TYPE, $args);
 }
-add_action('init', 'Timeline_Setup_Post_type');
-require_once plugin_dir_path(__FILE__) . '/iconpicker_meta_box.php';
-require_once plugin_dir_path(__FILE__) . '/datepicker_meta_box.php';
+add_action('init', 'atwb\setup\Timeline_Setup_Post_type');
+require_once plugin_dir_path(__FILE__) . '/timeline_iconpicker_meta_box.php';
+require_once plugin_dir_path(__FILE__) . '/timeline_datepicker_meta_box.php';
 
 /**
  * Activate the plugin.
@@ -60,11 +61,11 @@ require_once plugin_dir_path(__FILE__) . '/datepicker_meta_box.php';
 function Timeline_Plugin_activate()
 {
     // Trigger our function that registers the custom post type plugin.
-    timeline_setup_post_type();
+    Timeline_Setup_Post_type();
     // Clear the permalinks after the post type has been registered.
     flush_rewrite_rules();
 }
-register_activation_hook(__FILE__, 'timeline_plugin_activate');
+register_activation_hook(__FILE__, 'atwb\setup\timeline_plugin_activate');
 
 /**
  * Deactivation hook.
@@ -78,4 +79,4 @@ function Timeline_Plugin_deactivate()
     // Clear the permalinks to remove our post type's rules from the database.
     flush_rewrite_rules();
 }
-register_deactivation_hook(__FILE__, 'timeline_plugin_deactivate');
+register_deactivation_hook(__FILE__, 'atwb\setup\timeline_plugin_deactivate');

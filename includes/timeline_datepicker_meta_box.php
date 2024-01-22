@@ -10,25 +10,28 @@
  * @license  GPL v2 or later
  * @link     wordpress.org
  */
-
+namespace atwb\meta;
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 /**
  * This function will add custom meta as date picker to TImeline
  *
  * @return null
  */
-function Add_Custom_metabox()
+function timeline_Add_Custom_metabox()
 {
     add_meta_box(
         'timeline_date_metabox',
         'Timeline Date',
-        'Render_Iimeline_Date_metabox',
+        'timeline_Render_Iimeline_Date_metabox',
         _TIMELINE_POST_TYPE, // You can change this to 'page' or a custom post type
         'normal',
         'high'
     );
 }
 
-add_action('add_meta_boxes', 'Add_Custom_metabox');
+add_action('add_meta_boxes', 'atwb\meta\timeline_Add_Custom_metabox');
 
 /**
  * This function will add custom meta as date picker to TImeline
@@ -37,7 +40,7 @@ add_action('add_meta_boxes', 'Add_Custom_metabox');
  *
  * @return void
  */
-function Render_Iimeline_Date_metabox($post)
+function timeline_Render_Iimeline_Date_metabox($post)
 {
     // Retrieve the current value of the date from post meta
     $timeline_date = get_post_meta($post->ID, 'timeline_date', true);
@@ -53,7 +56,7 @@ function Render_Iimeline_Date_metabox($post)
  *
  * @return void
  */
-function Save_Timeline_Date_metabox($post_id)
+function timeline_Save_Date_metabox($post_id)
 {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
@@ -70,6 +73,6 @@ function Save_Timeline_Date_metabox($post_id)
     }
 }
 
-add_action('save_post', 'Save_Timeline_Date_metabox');
+add_action('save_post', 'atwb\meta\timeline_Save_Date_metabox');
 
 ?>

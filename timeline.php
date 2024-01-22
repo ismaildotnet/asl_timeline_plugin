@@ -31,10 +31,10 @@ define('TIMELINE_PLUGIN_DIR', __DIR__);
 define('TIMELINE_PLUGIN_PATH', __FILE__);
 define('TIMELINE_MENU_ICON_PATH', plugin_dir_url(__FILE__) . '/assets/images/menu-icon.png');
 
-require_once TIMELINE_PLUGIN_DIR . '/includes/setup.php';
-require_once TIMELINE_PLUGIN_DIR . '/includes/settings.php';
-require_once TIMELINE_PLUGIN_DIR . '/includes/enquee.php';
-require_once TIMELINE_PLUGIN_DIR . '/includes/shortcode.php';
+require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_setup.php';
+require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_settings.php';
+require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_enquee.php';
+require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_shortcode.php';
 
 /**
  * This function register block as timeline
@@ -51,8 +51,8 @@ add_action('init', 'Timeline_Block_init');
  *
  * @return null
  */
-function Register_Dash_Icons_For_block()
+function timeline_Register_Dash_Icons_For_block()
 {
     wp_enqueue_style('dashicons');
 }
-add_action('enqueue_block_assets', 'Register_Dash_Icons_For_block');
+add_action('enqueue_block_assets', 'timeline_Register_Dash_Icons_For_block');

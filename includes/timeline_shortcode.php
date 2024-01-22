@@ -10,12 +10,15 @@
  * @license  GPL v2 or later
  * @link     wordpress.org
  */
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 /**
  * This function will generate short code
  * 
  * @return null
  */
-function Timeline_Shortcode_function()
+function timeline_Shortcode_function()
 {
     $ascending_order = get_option('show_timeline_ascending_by_timeline_date', 0);
 
@@ -31,7 +34,7 @@ function Timeline_Shortcode_function()
 
     ob_start();
     if ($timeline_query->have_posts()) {
-        include plugin_dir_path(__FILE__) . '/config.php';
+        include plugin_dir_path(__FILE__) . '/timeline_config.php';
         ?>
  <div class="timeline_aria">
         <div class="timeline_items">
@@ -51,6 +54,6 @@ function Timeline_Shortcode_function()
     return ob_get_clean(); // Return the buffered content
     //return $output;
 }
-add_shortcode('timeline_shortcode', 'Timeline_Shortcode_function');
+add_shortcode('timeline_shortcode', 'timeline_Shortcode_function');
 
 ?>

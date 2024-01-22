@@ -10,12 +10,16 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 add_action('admin_menu', 'Add_Timeline_Plugin_Settings_page');
 /**
  * This Function will add a menu item to admin sidebar
  * 
  * @return null
  */
+
 function Add_Timeline_Plugin_Settings_page()
 {
     add_submenu_page(
@@ -35,10 +39,14 @@ function Add_Timeline_Plugin_Settings_page()
  */
 function Timeline_Plugin_Settings_page()
 {
-    $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'color'; // Default to Section 1
-
+    $allowed_tabs = array('color', 'other', 'animation', 'help');
+    $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'color';
+    // Validate $current_tab against allowed values
+    $current_tab = in_array($current_tab, $allowed_tabs) ? $current_tab : 'color';
+    // If needed, you can still sanitize the value
+    $current_tab = htmlspecialchars($current_tab, ENT_QUOTES, 'UTF-8');
     ?>
-
+    
     <div class="wrap">
         <h1>Timeline Settings</h1>
         <h2 class="nav-tab-wrapper">
@@ -71,13 +79,13 @@ Developed by<a href="#" title="Alchemy Software Limited">Alchemy Software Ltd.</
     <?php
 }
 
-add_action('admin_init', 'Register_Plugin_settings');
+add_action('admin_init', 'timeline_Register_Plugin_settings');
 /**
  * This function will register relevent settings field
  *
  * @return null
  */
-function Register_Plugin_settings()
+function timeline_Register_Plugin_settings()
 {
     // Specify the second argument as the option group, which should match the argument in settings_fields
     register_setting('timeline_s_color', 'timeline_border_color');
@@ -123,11 +131,11 @@ add_action('admin_init', 'Add_Settings_Sections_And_fields');
  */
 function Add_Settings_Sections_And_fields()
 {
-    include_once plugin_dir_path(__FILE__) . '\settings\color-settings.php';
-    include_once plugin_dir_path(__FILE__) . '\settings\animation-settings.php';
-    include_once plugin_dir_path(__FILE__) . '\settings\other-settings.php';
-    load_timline_color_settings();
-    load_timeline_other_settings();
-    Load_Timeline_Animation_settings();
+    include_once plugin_dir_path(__FILE__) . '\settings\timeline-color-settings.php';
+    include_once plugin_dir_path(__FILE__) . '\settings\timeline-animation-settings.php';
+    include_once plugin_dir_path(__FILE__) . '\settings\timeline-other-settings.php';
+    atwb\settings\timline_load_Color_settings();
+    atwb\settings\timeline_load_Other_settings();
+    atwb\settings\timeline_load_Animation_settings();
 }
 ?>

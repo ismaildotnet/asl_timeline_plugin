@@ -10,6 +10,7 @@
  * @license  GPL v2 or later
  * @link     wordpress.org
  */
+namespace awtb\enquee;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -18,12 +19,12 @@ if (!defined('ABSPATH')) {
  * 
  * @return null
  */
-function Enqueue_Admin_Styles_And_scripts()
+function timeline_Enqueue_Admin_Styles_And_scripts()
 {
     global $pagenow;
     wp_enqueue_style('wp-color-picker');
     // wp_enqueue_style('dashicons');
-    wp_enqueue_script('timeline-color-picker', plugin_dir_url(__DIR__) . '/admin/js/color_picker.js', array('wp-color-picker'), false, true);
+    wp_enqueue_script('timeline-color-picker', plugin_dir_url(__DIR__) . '/admin/js/timeline_color_picker.js', array('wp-color-picker'), false, true);
     wp_enqueue_style('timeline-editor-style', plugin_dir_url(__DIR__) . '/admin/css/timeline_editor.css');
     wp_enqueue_style('timeline-admin-item-style', plugin_dir_url(__DIR__) . '/assets/style.css');
 
@@ -31,15 +32,15 @@ function Enqueue_Admin_Styles_And_scripts()
         wp_enqueue_style('timeline-option-style', plugin_dir_url(__DIR__) . '/admin/css/timeline_style.css');
     }
 }
-add_action('admin_enqueue_scripts', 'Enqueue_Admin_Styles_And_scripts');
+add_action('admin_enqueue_scripts', 'awtb\enquee\timeline_Enqueue_Admin_Styles_And_scripts');
 
 /**
  * This Function will enquee the all styles and scripts 
  * 
  * @return null
  */
-function Enqueue_Styles_And_scripts()
+function timeline_Enqueue_Styles_And_scripts()
 {
     wp_enqueue_style('timeline-item-style', plugin_dir_url(__DIR__) . '/assets/style.css');
 }
-add_action('wp_enqueue_scripts', 'Enqueue_Styles_And_scripts');
+add_action('wp_enqueue_scripts', 'awtb\enquee\timeline_Enqueue_Styles_And_scripts');

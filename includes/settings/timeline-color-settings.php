@@ -10,14 +10,15 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
+namespace atwb\settings;
 /**
  * This function will register section and settings field
  *
  * @return null
  */
-function Load_Timline_Color_settings()
+function timline_load_Color_settings()
 {
-    add_settings_section('color', 'Timeline Color Scheme', 'Color_Section_callback', 'timeline-settings-color');
+    add_settings_section('color', 'Timeline Color Scheme', 'atwb\settings\timeline_Color_Section_callback', 'timeline-settings-color');
     $colorPicker = array(
         "timeline_border_color",
         "timeline_top_border_color",
@@ -42,7 +43,7 @@ function Load_Timline_Color_settings()
         add_settings_field(
             $field,
             ucwords(str_replace('_', ' ', $field)),
-            'renderColorPickerCallBack',
+            'atwb\settings\timeline_renderColorPickerCallBack',
             'timeline-settings-color', // Specify the page slug here
             'color',
             array('setting_id' => $field)
@@ -54,7 +55,7 @@ function Load_Timline_Color_settings()
  *
  * @return null
  */
-function Color_Section_callback()
+function timeline_Color_Section_callback()
 {
     // Description for the color section
     echo "<p>Explore the vivid world of our timeline's color section, where each hue is carefully chosen to represent distinct events and milestones. Dive into a visual journey that harmonizes colors with chronological significance, making your timeline not just informative but aesthetically pleasing.</p>";
@@ -67,7 +68,7 @@ function Color_Section_callback()
  * 
  * @return null
  */
-function renderColorPickerCallBack($args)
+function timeline_renderColorPickerCallBack($args)
 {
     // Extract the setting_id from $args
     $setting_id = $args['setting_id'];

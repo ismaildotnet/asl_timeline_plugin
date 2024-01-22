@@ -10,24 +10,28 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
+namespace atwb\meta;
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 /**
  * Add a custom meta box to the edit screen
  * 
  * @return null
  */
-function Add_Timeline_Custom_Meta_box()
+function Timeline_Add_Custom_Meta_box()
 {
     add_meta_box(
         'timeline_custom_meta_box',
         'Select Icon',
-        'Render_Timeline_Custom_Meta_box',
+        'Timeline_Render_Custom_Meta_box',
         _TIMELINE_POST_TYPE,
         'normal',
         'default'
     );
 }
 
-add_action('add_meta_boxes', 'Add_Timeline_Custom_Meta_box');
+add_action('add_meta_boxes', 'atwb\meta\Timeline_Add_Custom_Meta_box');
 
 /**
  * Render the HTML for the custom meta box
@@ -37,10 +41,10 @@ add_action('add_meta_boxes', 'Add_Timeline_Custom_Meta_box');
  * @return null
  */
 
-function Render_Timeline_Custom_Meta_box($post)
+function Timeline_Render_Custom_Meta_box($post)
 {
     $timeline_icon = get_post_meta($post->ID, 'timeline_icon', true);
-    $all_dashicons = Get_All_dashicons();
+    $all_dashicons = timeline_Get_All_dashicons();
     ?>
 
 <div class="dashicon-picker-aria">
@@ -74,7 +78,7 @@ jQuery(this).parent('div.icon-picker').toggleClass('opend');
  * 
  * @return array dashicons as array
  */
-function Get_All_dashicons()
+function timeline_Get_All_dashicons()
 {
 
     // Get the content of the Dashicons stylesheet
@@ -92,7 +96,7 @@ function Get_All_dashicons()
  * 
  * @return null
  */
-function Save_Timeline_Custom_Meta_box($post_id)
+function timeline_Save_Custom_Meta_box($post_id)
 {
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
         return;
@@ -109,6 +113,6 @@ function Save_Timeline_Custom_Meta_box($post_id)
     }
 }
 
-add_action('save_post', 'Save_Timeline_Custom_Meta_box');
+add_action('save_post', 'atwb\meta\timeline_Save_Custom_Meta_box');
 
 ?>

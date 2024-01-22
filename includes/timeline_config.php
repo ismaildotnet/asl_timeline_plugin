@@ -10,6 +10,10 @@
  * @license  GPL v2 or later
  * @link     wordpress.org
  */
+namespace atwb\config;
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
 $allvariables = array(
     "timeline_border_color",
     "timeline_top_border_color",
@@ -38,12 +42,12 @@ echo '<style type="text/css"> :root{';
 foreach ($allvariables as $field) {
     $option_value = get_option($field);
     $sanitized_value = sanitize_hex_color($option_value); // Adjust based on the type of value
-    echo '--' . $field . ':' . $sanitized_value . ';';
+    echo esc_attr( '--' . $field . ':' . $sanitized_value . ';');
 }
 foreach ($animations as $animate) {
     $option_value = get_option($animate);
     $sanitized_value = $option_value; // Adjust based on the type of value
-    echo '--' . $animate . ':' . $sanitized_value . ';';
+    echo esc_attr('--' . $animate . ':' . $sanitized_value . ';');
 }
 
 echo '--timeline_item_title_font_size:' . get_option('timeline_item_title_font_size', 30) . 'px;';

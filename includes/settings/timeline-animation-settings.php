@@ -10,20 +10,21 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
+namespace atwb\settings;
 /**
  * This function will register section and settings field
  *
  * @return null
  */
-function Load_Timeline_Animation_settings()
+function timeline_load_Animation_settings()
 {
-    add_settings_section('animation', 'Animation', 'Animation_Section_callback', 'timeline-settings-animation');
+    add_settings_section('animation', 'Animation', 'atwb\settings\Animation_Section_callback', 'timeline-settings-animation');
 
-    add_settings_field('timeline_odd_item_animation_name', 'Timeline odd item animation name', 'animationselectCallback', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_odd_item_animation_name'));
-    add_settings_field('timeline_even_item_animation_name', 'Timeline even item animation name', 'animationselectCallback', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_even_item_animation_name'));
-    add_settings_field('timeline_item_animate_duration', 'Timeline item animate duration', 'animateNumberCallBack', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_duration'));
-    add_settings_field('timeline_item_animate_delay', 'Timeline item animate delay', 'animateNumberCallBack', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_delay'));
-    add_settings_field('timeline_item_animate_repeat', 'Timeline item animate repeat', 'animateNumberCallBack', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_repeat'));
+    add_settings_field('timeline_odd_item_animation_name', 'Timeline odd item animation name', 'atwb\settings\animationselectCallback', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_odd_item_animation_name'));
+    add_settings_field('timeline_even_item_animation_name', 'Timeline even item animation name', 'atwb\settings\animationselectCallback', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_even_item_animation_name'));
+    add_settings_field('timeline_item_animate_duration', 'Timeline item animate duration', 'atwb\settings\animateNumberCallBack', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_duration'));
+    add_settings_field('timeline_item_animate_delay', 'Timeline item animate delay', 'atwb\settings\animateNumberCallBack', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_delay'));
+    add_settings_field('timeline_item_animate_repeat', 'Timeline item animate repeat', 'atwb\settings\animateNumberCallBack', 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_repeat'));
 }
 /**
  * The Animation load html function call back function
@@ -44,7 +45,7 @@ function animationselectCallback($args)
     // Get the option value
     $value = get_option($setting_id, ''); // Default color
     // Output the select picker input
-    echo '<select name="' . esc_attr($setting_id) . '" class="timeline_select">';
+    echo  '<select name="' . esc_attr($setting_id) . '" class="timeline_select">';
     echo '<option value="">--No animation--</option>';
     foreach ($animationNames as $animate) {
         $selected = selected($animate, $value, false);
@@ -81,7 +82,7 @@ function animateNumberCallBack($args)
                 $selected = selected($i . 's', $value, false);
                 echo '<option value="' . esc_attr($i) . 's" ' . $selected . '>' . $i . 's</option>';
         }
-            echo '</select>';
+            echo ese_html('</select>');
         break;
     case 'timeline_item_animate_repeat':
             $value = get_option($setting_id, ''); // Default color
@@ -105,5 +106,5 @@ function animateNumberCallBack($args)
 function Animation_Section_callback()
 {
     // Description for the color section
-    echo "<p>animation section</p>";
+    echo esc_html("<p>animation section</p>");
 }
