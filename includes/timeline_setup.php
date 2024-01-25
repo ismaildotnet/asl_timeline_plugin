@@ -16,6 +16,16 @@ if (!defined('ABSPATH')) {
 }
 define("_TIMELINE_POST_TYPE", "timeline");
 
+class ATWBSetup{
+
+    function __construct(){
+        require_once plugin_dir_path(__FILE__) . '/timeline_iconpicker_meta_box.php';
+        require_once plugin_dir_path(__FILE__) . '/timeline_datepicker_meta_box.php';
+        add_action('init', array($this, 'Timeline_Setup_Post_type'));
+        register_activation_hook(__FILE__, array($this, 'timeline_plugin_activate'));
+        register_deactivation_hook(__FILE__, array($this, 'timeline_plugin_deactivate'));
+
+    }
 /**
  * Register the "book" custom post type
  *
@@ -49,9 +59,6 @@ function Timeline_Setup_Post_type()
     );
     register_post_type(_TIMELINE_POST_TYPE, $args);
 }
-add_action('init', 'atwb\setup\Timeline_Setup_Post_type');
-require_once plugin_dir_path(__FILE__) . '/timeline_iconpicker_meta_box.php';
-require_once plugin_dir_path(__FILE__) . '/timeline_datepicker_meta_box.php';
 
 /**
  * Activate the plugin.
@@ -65,7 +72,6 @@ function Timeline_Plugin_activate()
     // Clear the permalinks after the post type has been registered.
     flush_rewrite_rules();
 }
-register_activation_hook(__FILE__, 'atwb\setup\timeline_plugin_activate');
 
 /**
  * Deactivation hook.
@@ -79,4 +85,5 @@ function Timeline_Plugin_deactivate()
     // Clear the permalinks to remove our post type's rules from the database.
     flush_rewrite_rules();
 }
-register_deactivation_hook(__FILE__, 'atwb\setup\timeline_plugin_deactivate');
+}
+new ATWBSetup();

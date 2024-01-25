@@ -10,70 +10,79 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
-namespace atwb\settings;
+namespace ATWB\settings;
+
 /**
- * This function will register section and settings field
- *
- * @return null
+ * Class TimelineColorSettings
  */
-function timline_load_Color_settings()
-{
-    add_settings_section('color', 'Timeline Color Scheme', 'atwb\settings\timeline_Color_Section_callback', 'timeline-settings-color');
-    $colorPicker = array(
-        "timeline_border_color",
-        "timeline_top_border_color",
-        "timeline_odd_item_icon_color",
-        "timeline_odd_item_icon_background_color",
-        "timeline_even_item_icon_color",
-        "timeline_even_item_icon_background_color",
+class TimelineColorSettings {
 
-        "timeline_odd_item_title_color",
-        "timeline_even_item_title_color",
+    /**
+     * Initialize the TimelineColorSettings class
+     */
+    public function __construct() {
+       $this-> loadColorSettings();
+    }
 
-        "timeline_odd_item_text_color",
-        "timeline_odd_item_background_color",
-        "timeline_odd_item_border_color",
+    /**
+     * Load color settings section and fields
+     *
+     * @return void
+     */
+    public function loadColorSettings() {
+        add_settings_section('color', 'Timeline Color Scheme', array($this, 'colorSectionCallback'), 'timeline-settings-color');
 
-        "timeline_even_item_text_color",
-        "timeline_even_item_background_color",
-        "timeline_even_item_border_color",
-
-    );
-    foreach ($colorPicker as $field) {
-        add_settings_field(
-            $field,
-            ucwords(str_replace('_', ' ', $field)),
-            'atwb\settings\timeline_renderColorPickerCallBack',
-            'timeline-settings-color', // Specify the page slug here
-            'color',
-            array('setting_id' => $field)
+        $colorPicker = array(
+            "timeline_border_color",
+            "timeline_top_border_color",
+            "timeline_odd_item_icon_color",
+            "timeline_odd_item_icon_background_color",
+            "timeline_even_item_icon_color",
+            "timeline_even_item_icon_background_color",
+            "timeline_odd_item_title_color",
+            "timeline_even_item_title_color",
+            "timeline_odd_item_text_color",
+            "timeline_odd_item_background_color",
+            "timeline_odd_item_border_color",
+            "timeline_even_item_text_color",
+            "timeline_even_item_background_color",
+            "timeline_even_item_border_color",
         );
+
+        foreach ($colorPicker as $field) {
+            add_settings_field(
+                $field,
+                ucwords(str_replace('_', ' ', $field)),
+                array($this, 'renderColorPickerCallback'),
+                'timeline-settings-color',
+                'color',
+                array('setting_id' => $field)
+            );
+        }
+    }
+
+    /**
+     * Display HTML for the color settings section
+     *
+     * @return void
+     */
+    public function colorSectionCallback() {
+        echo "<p>Explore the vivid world of our timeline's color section, where each hue is carefully chosen to represent distinct events and milestones. Dive into a visual journey that harmonizes colors with chronological significance, making your timeline not just informative but aesthetically pleasing.</p>";
+    }
+
+    /**
+     * Display HTML for the color picker field
+     *
+     * @param array $args Arguments of the color picker field
+     *
+     * @return void
+     */
+    public function renderColorPickerCallback($args) {
+        $settingId = $args['setting_id'];
+        $value = get_option($settingId, '#ffffff'); // Default color
+        echo '<input type="text" name="' . esc_attr($settingId) . '" value="' . esc_attr($value) . '" class="timeline-color-field" />';
     }
 }
-/**
- * This function will return some html for section
- *
- * @return null
- */
-function timeline_Color_Section_callback()
-{
-    // Description for the color section
-    echo "<p>Explore the vivid world of our timeline's color section, where each hue is carefully chosen to represent distinct events and milestones. Dive into a visual journey that harmonizes colors with chronological significance, making your timeline not just informative but aesthetically pleasing.</p>";
-}
 
-/**
- * This function will return some html for settings
- *
- * @param mixed $args is the arguments of settings field
- * 
- * @return null
- */
-function timeline_renderColorPickerCallBack($args)
-{
-    // Extract the setting_id from $args
-    $setting_id = $args['setting_id'];
-    // Get the option value
-    $value = get_option($setting_id, '#ffffff'); // Default color
-    // Output the color picker input
-    echo '<input type="text" name="' . esc_attr($setting_id) . '" value="' . esc_attr($value) . '" class="timeline-color-field" />';
-}
+// Instantiate the class
+new TimelineColorSettings();

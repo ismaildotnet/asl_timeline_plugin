@@ -10,7 +10,15 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
-namespace atwb\settings;
+namespace ATWB\Settings;
+if (!defined('ABSPATH')) {
+    exit; // Exit if accessed directly
+}
+class TimelineOtherSettings{
+public function __construct(){
+    $this->timeline_load_Other_settings();
+}
+
 /**
  * This function will register section and settings field
  *
@@ -18,7 +26,7 @@ namespace atwb\settings;
  */
 function timeline_load_Other_settings()
 {
-    add_settings_section('other', 'Other Timeline Settings', 'atwb\settings\timeline_Other_Section_callback', 'timeline-settings-other');
+    add_settings_section('other', 'Other Timeline Settings', array($this, 'timeline_Other_Section_callback'), 'timeline-settings-other');
 
     $otherSettings = array(
         "timeline_maximum_item",
@@ -29,13 +37,13 @@ function timeline_load_Other_settings()
         add_settings_field(
             $field,
             ucwords(str_replace('_', ' ', $field)),
-            'atwb\settings\timeline_Other_Type_callback',
+            array($this, 'timeline_Other_Type_callback'),
             'timeline-settings-other', // Specify the page slug here
             'other',
             array('setting_id' => $field)
         );
     }
-    add_settings_field('show_timeline_ascending_by_timeline_date', 'Timeline Item with assending Order', 'atwb\settings\renderBooleanFieldCallBack', 'timeline-settings-other', 'other', array('setting_id' => 'show_timeline_ascending_by_timeline_date'));
+    add_settings_field('show_timeline_ascending_by_timeline_date', 'Timeline Item with assending Order', array($this, 'renderBooleanFieldCallBack'), 'timeline-settings-other', 'other', array('setting_id' => 'show_timeline_ascending_by_timeline_date'));
 
 }
 /**
@@ -82,3 +90,5 @@ function renderBooleanFieldCallBack($args)
    
 <?php
 }
+}
+new TimelineOtherSettings();

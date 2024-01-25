@@ -1,6 +1,5 @@
 <?php
 /**
- * This is a file label comment.
  *
  * PHP version 7.4.1
  *
@@ -23,7 +22,7 @@
  * Text Domain:       TimeLine
  * Domain Path:       /languages
  */
-
+namespace ATWB;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
@@ -31,28 +30,40 @@ define('TIMELINE_PLUGIN_DIR', __DIR__);
 define('TIMELINE_PLUGIN_PATH', __FILE__);
 define('TIMELINE_MENU_ICON_PATH', plugin_dir_url(__FILE__) . '/assets/images/menu-icon.png');
 
-require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_setup.php';
-require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_settings.php';
-require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_enquee.php';
-require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_shortcode.php';
+class ATWBInitializer{
+    function init(){
+        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_setup.php';
+        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_settings.php';
+        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_enquee.php';
+        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_shortcode.php';
+        add_action('init', array($this, 'Timeline_Block'));
+        add_action('enqueue_block_assets', array($this,'timeline_Dash_Icons_For_block'));
+    }
+    /**
+     * This function register block as timeline
+     *
+     * @return null
+     */
+    function Timeline_Block()
+    {
+        register_block_type(TIMELINE_PLUGIN_DIR . '/blocks');
+    }
 
-/**
- * This function register block as timeline
- *
- * @return null
- */
-function Timeline_Block_init()
-{
-    register_block_type(__DIR__ . '/blocks');
+    /**
+     * Registering dashicons for block
+     *
+     * @return null
+     */
+    function timeline_Dash_Icons_For_block()
+    {
+       try {
+        wp_enqueue_style('dashicons');
+       } catch (\Throwable $th) {
+            $message = $th->error_message;
+       }
+    }
 }
-add_action('init', 'Timeline_Block_init');
-/**
- * Registering dashicons for block
- *
- * @return null
- */
-function timeline_Register_Dash_Icons_For_block()
-{
-    wp_enqueue_style('dashicons');
-}
-add_action('enqueue_block_assets', 'timeline_Register_Dash_Icons_For_block');
+
+$timelineinitializer = new ATWBInitializer();
+$timelineinitializer->init();
+

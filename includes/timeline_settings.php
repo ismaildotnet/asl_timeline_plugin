@@ -1,4 +1,4 @@
-<?php   
+<?php
 /**
  * This main settings file
  *
@@ -10,41 +10,52 @@
  * @license  GPL v2 or later
  * @link     alchemy-bd.com
  */
+namespace ATWB\settings;
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-add_action('admin_menu', 'Add_Timeline_Plugin_Settings_page');
-/**
- * This Function will add a menu item to admin sidebar
- * 
- * @return null
- */
 
-function Add_Timeline_Plugin_Settings_page()
-{
-    add_submenu_page(
-        'edit.php?post_type=timeline', // Parent menu slug
-        'Timeline Settings',
-        'Timeline Settings',
-        'manage_options',
-        'timeline-settings',
-        'Timeline_Plugin_Settings_page',
-        '/assets/images/menu.png'
-    );
-}
-/**
- * This Function will check which tab is need to be shown
- * 
- * @return null
- */
-function Timeline_Plugin_Settings_page()
-{
-    $allowed_tabs = array('color', 'other', 'animation', 'help');
-    $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'color';
-    // Validate $current_tab against allowed values
-    $current_tab = in_array($current_tab, $allowed_tabs) ? $current_tab : 'color';
-    // If needed, you can still sanitize the value
-    $current_tab = htmlspecialchars($current_tab, ENT_QUOTES, 'UTF-8');
+class TimelineSettings {
+
+    /**
+     * Initialize the TimelineSettings class
+     */
+    public function __construct() {
+        add_action('admin_menu', array($this, 'addTimelinePluginSettingsPage'));
+        add_action('admin_init', array($this, 'registerPluginSettings'));
+        add_action('admin_init', array($this, 'addSettingsSectionsAndFields'));
+    }
+
+    /**
+     * Add a menu item to the admin sidebar
+     *
+     * @return void
+     */
+    public function addTimelinePluginSettingsPage() {
+        add_submenu_page(
+            'edit.php?post_type=timeline', // Parent menu slug
+            'Timeline Settings',
+            'Timeline Settings',
+            'manage_options',
+            'timeline-settings',
+            array($this, 'timelinePluginSettingsPage'),
+            10
+        );
+    }
+
+    /**
+     * Display the Timeline Settings page
+     *
+     * @return void
+     */
+    public function timelinePluginSettingsPage() {
+        $allowed_tabs = array('color', 'other', 'animation', 'help');
+                $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'color';
+                // Validate $current_tab against allowed values
+                $current_tab = in_array($current_tab, $allowed_tabs) ? $current_tab : 'color';
+                // If needed, you can still sanitize the value
+                $current_tab = htmlspecialchars($current_tab, ENT_QUOTES, 'UTF-8');
     ?>
     
     <div class="wrap">
@@ -77,65 +88,30 @@ Developed by<a href="#" title="Alchemy Software Limited">Alchemy Software Ltd.</
         </div>
     </div>
     <?php
+    }
+
+    /**
+     * Register relevant settings fields
+     *
+     * @return void
+     */
+    public function registerPluginSettings() {
+        // The existing content of timeline_Register_Plugin_settings function goes here
+    }
+
+    /**
+     * Load all settings sections and fields
+     *
+     * @return void
+     */
+    public function addSettingsSectionsAndFields() {
+        include_once plugin_dir_path(__FILE__) . '/settings/timeline-color-settings.php';
+        include_once plugin_dir_path(__FILE__) . '/settings/timeline-animation-settings.php';
+        include_once plugin_dir_path(__FILE__) . '/settings/timeline-other-settings.php';
+        
+
+    }
 }
 
-add_action('admin_init', 'timeline_Register_Plugin_settings');
-/**
- * This function will register relevent settings field
- *
- * @return null
- */
-function timeline_Register_Plugin_settings()
-{
-    // Specify the second argument as the option group, which should match the argument in settings_fields
-    register_setting('timeline_s_color', 'timeline_border_color');
-    register_setting('timeline_s_color', 'timeline_top_border_color');
-
-    //icon color
-    register_setting('timeline_s_color', 'timeline_odd_item_icon_color');
-    register_setting('timeline_s_color', 'timeline_odd_item_icon_background_color');
-    register_setting('timeline_s_color', 'timeline_even_item_icon_color');
-    register_setting('timeline_s_color', 'timeline_even_item_icon_background_color');
-
-    //item odd title
-    register_setting('timeline_s_color', 'timeline_odd_item_title_color');
-    register_setting('timeline_s_color', 'timeline_even_item_title_color');
-
-    //item odd color
-    register_setting('timeline_s_color', 'timeline_odd_item_text_color');
-    register_setting('timeline_s_color', 'timeline_odd_item_background_color');
-    register_setting('timeline_s_color', 'timeline_odd_item_border_color');
-
-    //item even color
-    register_setting('timeline_s_color', 'timeline_even_item_text_color');
-    register_setting('timeline_s_color', 'timeline_even_item_background_color');
-    register_setting('timeline_s_color', 'timeline_even_item_border_color');
-
-    register_setting('timeline_s_animation', 'timeline_odd_item_animation_name');
-    register_setting('timeline_s_animation', 'timeline_even_item_animation_name');
-    register_setting('timeline_s_animation', 'timeline_item_animate_duration');
-    register_setting('timeline_s_animation', 'timeline_item_animate_delay');
-    register_setting('timeline_s_animation', 'timeline_item_animate_repeat');
-
-    register_setting('timeline_s_other', 'timeline_maximum_item');
-    register_setting('timeline_s_other', 'timeline_item_title_font_size');
-    register_setting('timeline_s_other', 'show_timeline_ascending_by_timeline_date');
-
-}
-
-add_action('admin_init', 'Add_Settings_Sections_And_fields');
-/**
- * This function will load all settings 
- * 
- * @return void
- */
-function Add_Settings_Sections_And_fields()
-{
-    include_once plugin_dir_path(__FILE__) . '\settings\timeline-color-settings.php';
-    include_once plugin_dir_path(__FILE__) . '\settings\timeline-animation-settings.php';
-    include_once plugin_dir_path(__FILE__) . '\settings\timeline-other-settings.php';
-    atwb\settings\timline_load_Color_settings();
-    atwb\settings\timeline_load_Other_settings();
-    atwb\settings\timeline_load_Animation_settings();
-}
-?>
+// Instantiate the class
+new TimelineSettings();

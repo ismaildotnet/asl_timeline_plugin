@@ -9,7 +9,7 @@
   "description": "Create timeline with this block; this is the part of timeline plugin developed by Alchemy Software Limited",
   "example": {},
   "supports": {
-    "html": false
+    "html": true
   },
   "textdomain": "timeline",
   "editorScript": "file:./index.js",
@@ -17,6 +17,5 @@
     "file:./index.css",
     "file:./editor.css"
   ],
-  "style": "",
-  "viewScript": "file:./view.js"
+  "style": "file:./index.css"
 }
