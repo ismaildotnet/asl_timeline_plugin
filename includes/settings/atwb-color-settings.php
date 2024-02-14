@@ -30,31 +30,31 @@ class TimelineColorSettings {
      * @return void
      */
     public function loadColorSettings() {
-        add_settings_section('color', 'Timeline Color Scheme', array($this, 'colorSectionCallback'), 'timeline-settings-color');
+        add_settings_section('color', 'Timeline Color Scheme', array($this, 'atwb_colorSectionCallback'), 'atwb-settings-color');
 
         $colorPicker = array(
-            "timeline_border_color",
-            "timeline_top_border_color",
-            "timeline_odd_item_icon_color",
-            "timeline_odd_item_icon_background_color",
-            "timeline_even_item_icon_color",
-            "timeline_even_item_icon_background_color",
-            "timeline_odd_item_title_color",
-            "timeline_even_item_title_color",
-            "timeline_odd_item_text_color",
-            "timeline_odd_item_background_color",
-            "timeline_odd_item_border_color",
-            "timeline_even_item_text_color",
-            "timeline_even_item_background_color",
-            "timeline_even_item_border_color",
+            "atwb_border_color",
+            "atwb_top_border_color",
+            "atwb_odd_item_icon_color",
+            "atwb_odd_item_icon_background_color",
+            "atwb_even_item_icon_color",
+            "atwb_even_item_icon_background_color",
+            "atwb_odd_item_title_color",
+            "atwb_even_item_title_color",
+            "atwb_odd_item_text_color",
+            "atwb_odd_item_background_color",
+            "atwb_odd_item_border_color",
+            "atwb_even_item_text_color",
+            "atwb_even_item_background_color",
+            "atwb_even_item_border_color",
         );
 
         foreach ($colorPicker as $field) {
             add_settings_field(
                 $field,
                 ucwords(str_replace('_', ' ', $field)),
-                array($this, 'renderColorPickerCallback'),
-                'timeline-settings-color',
+                array($this, 'atwb_renderColorPickerCallback'),
+                'atwb-settings-color',
                 'color',
                 array('setting_id' => $field)
             );
@@ -66,7 +66,7 @@ class TimelineColorSettings {
      *
      * @return void
      */
-    public function colorSectionCallback() {
+    public function atwb_colorSectionCallback() {
         echo "<p>Explore the vivid world of our timeline's color section, where each hue is carefully chosen to represent distinct events and milestones. Dive into a visual journey that harmonizes colors with chronological significance, making your timeline not just informative but aesthetically pleasing.</p>";
     }
 
@@ -77,7 +77,7 @@ class TimelineColorSettings {
      *
      * @return void
      */
-    public function renderColorPickerCallback($args) {
+    public function atwb_renderColorPickerCallback($args) {
         $settingId = $args['setting_id'];
         $value = get_option($settingId, '#ffffff'); // Default color
         echo '<input type="text" name="' . esc_attr($settingId) . '" value="' . esc_attr($value) . '" class="timeline-color-field" />';

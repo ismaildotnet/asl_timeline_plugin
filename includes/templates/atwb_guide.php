@@ -19,7 +19,7 @@
     <h3>Displaying Timeline</h3>
     <ol class="list-unstyled" type="1">
         <li class="list-item">Edit Page or Create a New one from the menu</li>
-        <li class="list-item"><code>[timeline_shortcode]</code> Copy this shortcode</li>
+        <li class="list-item"><code>[awesome_timeline_with_block_shortcode]</code> Copy this shortcode</li>
         <li class="list-item">Add an HTML block or edit as HTML, paste the copied code</li>
         <li class="list-item">Hit <strong>Save/Update/Publish</strong> based on availability</li>
     </ol>

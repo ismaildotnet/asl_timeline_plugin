@@ -32,19 +32,19 @@ define('TIMELINE_MENU_ICON_PATH', plugin_dir_url(__FILE__) . '/assets/images/men
 
 class ATWBInitializer{
     function init(){
-        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_setup.php';
-        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_settings.php';
-        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_enquee.php';
-        require_once TIMELINE_PLUGIN_DIR . '/includes/timeline_shortcode.php';
-        add_action('init', array($this, 'Timeline_Block'));
-        add_action('enqueue_block_assets', array($this,'timeline_Dash_Icons_For_block'));
+        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_setup.php';
+        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_settings.php';
+        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_enquee.php';
+        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_shortcode.php';
+        add_action('init', array($this, 'atwb_Block'));
+        add_action('enqueue_block_assets', array($this,'atwb_Dash_Icons_For_block'));
     }
     /**
      * This function register block as timeline
      *
      * @return null
      */
-    function Timeline_Block()
+    function atwb_Block()
     {
         register_block_type(TIMELINE_PLUGIN_DIR . '/blocks');
     }
@@ -54,7 +54,7 @@ class ATWBInitializer{
      *
      * @return null
      */
-    function timeline_Dash_Icons_For_block()
+    function atwb_Dash_Icons_For_block()
     {
        try {
         wp_enqueue_style('dashicons');

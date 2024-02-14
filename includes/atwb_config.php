@@ -14,7 +14,7 @@ namespace ATWB\Config;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-class TimelineConfig{
+class ATWBTimelineConfig{
     public function __construct() {
        $this->TimelineWriteCSS();
     }
@@ -53,12 +53,11 @@ function TimelineWriteCSS(){
         }
         foreach (self::animations as $animate) {
             $option_value = get_option($animate);
-            $sanitized_value = $option_value; // Adjust based on the type of value
+            $sanitized_value = intval($option_value, 0); // Adjust based on the type of value
             echo esc_attr('--' . $animate . ':' . $sanitized_value . ';');
         }
-        
-        echo '--timeline_item_title_font_size:' . get_option('timeline_item_title_font_size', 30) . 'px;';
+        $fontsize = esc_attr(  get_option('timeline_item_title_font_size', 30));
+        echo esc_attr('--timeline_item_title_font_size:' . $fontsize . 'px;');
         echo '}</style>';
-}
-}
-new TimelineConfig();
+}}
+new ATWBTimelineConfig();

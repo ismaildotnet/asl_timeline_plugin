@@ -14,23 +14,23 @@ namespace ATWB\Settings;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-class TimelineAnimationSettings{
+class AnimationSettings{
     public function __construct(){
-     $this-> timeline_load_Animation_settings();
+     $this-> atwb_load_Animation_settings();
     }
 /**
  * This function will register section and settings field
  *
  * @return null
  */
-function timeline_load_Animation_settings()
+function atwb_load_Animation_settings()
 {
-    add_settings_section('animation', 'Animation', array($this, 'Animation_Section_callback'), 'timeline-settings-animation');
-    add_settings_field('timeline_odd_item_animation_name',  esc_html('Timeline odd item animation'), array($this, 'animationselectCallback'), 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_odd_item_animation_name'));
-    add_settings_field('timeline_even_item_animation_name', esc_html('Timeline even item animation'), array($this, 'animationselectCallback'), 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_even_item_animation_name'));
-    add_settings_field('timeline_item_animate_duration', esc_html('Timeline item animate duration'), array($this, 'animateNumberCallBack'), 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_duration'));
-    add_settings_field('timeline_item_animate_delay', esc_html('Timeline item animate delay'), array($this, 'animateNumberCallBack'), 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_delay'));
-    add_settings_field('timeline_item_animate_repeat', esc_html('Timeline item animate repeat'), array($this, 'animateNumberCallBack'), 'timeline-settings-animation', 'animation', array('setting_id' => 'timeline_item_animate_repeat'));
+    add_settings_section('animation', 'Animation', array($this, 'atwb_Animation_Section_callback'), 'atwb-settings-animation');
+    add_settings_field('atwb_odd_item_animation_name',  esc_html('Timeline odd item animation'), array($this, 'atwb_animationselectCallback'), 'atwb-settings-animation', 'animation', array('setting_id' => 'atwb_odd_item_animation_name'));
+    add_settings_field('atwb_even_item_animation_name', esc_html('Timeline even item animation'), array($this, 'atwb_animationselectCallback'), 'atwb-settings-animation', 'animation', array('setting_id' => 'atwb_even_item_animation_name'));
+    add_settings_field('atwb_item_animate_duration', esc_html('Timeline item animate duration'), array($this, 'atwb_animateNumberCallBack'), 'atwb-settings-animation', 'animation', array('setting_id' => 'atwb_item_animate_duration'));
+    add_settings_field('atwb_item_animate_delay', esc_html('Timeline item animate delay'), array($this, 'atwb_animateNumberCallBack'), 'atwb-settings-animation', 'animation', array('setting_id' => 'atwb_item_animate_delay'));
+    add_settings_field('atwb_item_animate_repeat', esc_html('Timeline item animate repeat'), array($this, 'atwb_animateNumberCallBack'), 'atwb-settings-animation', 'animation', array('setting_id' => 'atwb_item_animate_repeat'));
 }
 /**
  * The Animation load html function call back function
@@ -39,7 +39,7 @@ function timeline_load_Animation_settings()
  * 
  * @return null
  */
-function animationselectCallback($args)
+function atwb_animationselectCallback($args)
 {
     $animationNames = array(
         "slideInDown",
@@ -58,7 +58,7 @@ function animationselectCallback($args)
     foreach ($animationNames as $animate) {
         $selected = selected($animate, $value, false);
         ?>
-        <option value="<?php echo esc_attr($animate)?>" <?php echo $selected?>><?php echo esc_html( $animate )?></option>
+        <option value="<?php echo esc_attr($animate)?>" <?php echo esc_attr($selected)?>><?php echo esc_html( $animate )?></option>
         <?php
     }?>
     </select>
@@ -71,11 +71,11 @@ function animationselectCallback($args)
  * 
  * @return null
  */
-function animateNumberCallBack($args)
+function atwb_animateNumberCallBack($args)
 {
     $setting_id = $args['setting_id'];
     switch ($setting_id) {
-    case 'timeline_item_animate_duration':
+    case 'atwb_item_animate_duration':
             $value = get_option($setting_id, ''); 
             ?>
             <select name="<?php echo esc_attr($setting_id)?>" class="timeline_select">
@@ -84,14 +84,14 @@ function animateNumberCallBack($args)
         for ($i = 1; $i <= 5; $i++) {
                 $selected = selected($i . 's', $value, false);
                 ?>
-               <option value="<?php echo esc_attr($i)?>s" <?php echo $selected?>><?php echo esc_html( $i .'s' )?></option>
+               <option value="<?php echo esc_attr($i)?>s" <?php echo esc_attr($selected)?>><?php echo esc_html( $i .'s' )?></option>
                 <?php
         }
         ?>
            </select>
            <?php
         break;
-    case 'timeline_item_animate_delay':
+    case 'atwb_item_animate_delay':
             $value = get_option($setting_id, ''); // Default color
             ?>
             <select name="<?php echo esc_attr($setting_id)?>" class="timeline_select">
@@ -100,14 +100,14 @@ function animateNumberCallBack($args)
         for ($i = 1; $i <= 5; $i++) {
                 $selected = selected($i . 's', $value, false);
                 ?>
-                 <option value="<?php echo esc_attr($i)?>s" <?php echo $selected?>> <?php echo esc_html( $i .'s' )?></option>
+                 <option value="<?php echo esc_attr($i)?>s" <?php echo esc_attr($selected)?>> <?php echo esc_html( $i .'s' )?></option>
                  <?php
                     }
                  ?>
             </select>
             <?php
         break;
-    case 'timeline_item_animate_repeat':
+    case 'atwb_item_animate_repeat':
             $value = get_option($setting_id, ''); ?>
             <select name="<?php echo esc_attr($setting_id)  ?>" class="timeline_select">
             <option value="">--select repeats--</option>
@@ -115,7 +115,7 @@ function animateNumberCallBack($args)
         for ($i = 1; $i <= 5; $i++) {
                 $selected = selected($i, $value, false);
                 ?>
-                <option value="<?php echo esc_attr($i)  ?>" <?php echo $selected?> > <?php echo esc_html( $i)?> </option>
+                <option value="<?php echo esc_attr($i)  ?>" <?php echo esc_attr($selected)?> > <?php echo esc_html( $i)?> </option>
                 <?php
         }
         ?>
@@ -131,10 +131,10 @@ function animateNumberCallBack($args)
  * 
  * @return null
  */
-    function Animation_Section_callback()
+    function atwb_Animation_Section_callback()
     {
         // Description for the color section
         echo esc_html("");
     }
 }
-new TimelineAnimationSettings();
+new AnimationSettings();

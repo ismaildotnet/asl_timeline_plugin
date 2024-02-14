@@ -18,7 +18,7 @@ if (!defined('ABSPATH')) {
 
 class TimelineShortcode {
     public function __construct() {
-        add_shortcode('timeline_shortcode', array($this, 'timeline_Shortcode_function'));
+        add_shortcode('awesome_timeline_with_block_shortcode', array($this, 'atwb_Shortcode_function'));
     }
 
     /**
@@ -26,8 +26,8 @@ class TimelineShortcode {
      * 
      * @return null
      */
-    public function timeline_Shortcode_function() {
-        $ascending_order = get_option('show_timeline_ascending_by_timeline_date', 0);
+    public function atwb_Shortcode_function() {
+        $ascending_order = get_option('timeline_ascending_by_timeline_date', 0);
 
         $args = array(
             'post_type'      => _TIMELINE_POST_TYPE, // Replace with your actual post type
@@ -40,14 +40,14 @@ class TimelineShortcode {
         $timeline_query = new \WP_Query($args);
         ob_start();
         if ($timeline_query->have_posts()) {
-           include plugin_dir_path(__FILE__) . '/timeline_config.php';
+           include plugin_dir_path(__FILE__) . '/atwb_config.php';
             ?>
             <div class="timeline_aria">
                 <div class="timeline_items">
                     <?php
                     while ($timeline_query->have_posts()) {
                         $timeline_query->the_post();
-                        include plugin_dir_path(__FILE__) . '/templates/timeline_item.php';
+                        include plugin_dir_path(__FILE__) . '/templates/atwb_item.php';
                     }
                     ?>
                 </div>
