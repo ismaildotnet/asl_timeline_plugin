@@ -20,12 +20,14 @@ if (!defined('ABSPATH')) {
 /**
  * Class Timeline_Enqueue
  */
-class Timeline_Enqueue {
+class Timeline_Enqueue
+{
 
     /**
      * Initialize the class
      */
-    public function __construct() {
+    public function __construct()
+    {
         add_action('admin_enqueue_scripts', array($this, 'enqueue_admin_styles_and_scripts'));
         add_action('wp_enqueue_scripts', array($this, 'enqueue_styles_and_scripts'));
     }
@@ -33,24 +35,26 @@ class Timeline_Enqueue {
     /**
      * Enqueue styles and scripts for the admin side
      */
-    public function enqueue_admin_styles_and_scripts() {
+    public function enqueue_admin_styles_and_scripts()
+    {
         global $pagenow;
 
         wp_enqueue_style('wp-color-picker');
-        wp_enqueue_script('timeline-color-picker', plugin_dir_url(__DIR__) . '/admin/js/atwb_color_picker.js', array('wp-color-picker'), false, true);
-        wp_enqueue_style('timeline-editor-style', plugin_dir_url(__DIR__) . '/admin/css/atwb_editor.css');
-        wp_enqueue_style('timeline-admin-item-style', plugin_dir_url(__DIR__) . '/assets/style.css');
+        wp_enqueue_script('awtb-color-picker', plugin_dir_url(__DIR__) . '/admin/js/atwb_color_picker.js', array('wp-color-picker'), false, true);
+        wp_enqueue_style('awtb-editor-style', plugin_dir_url(__DIR__) . '/admin/css/atwb_editor.css');
+        wp_enqueue_style('awtb-admin-item-style', plugin_dir_url(__DIR__) . '/assets/style.css');
 
         if ($pagenow === 'edit.php' && isset($_GET['post_type']) && $_GET['post_type'] === 'atwb' && isset($_GET['page']) && $_GET['page'] === 'atwb-settings') {
-            wp_enqueue_style('timeline-option-style', plugin_dir_url(__DIR__) . '/admin/css/atwb_style.css');
+            wp_enqueue_style('awtb-option-style', plugin_dir_url(__DIR__) . '/admin/css/atwb_style.css');
         }
     }
 
     /**
      * Enqueue styles and scripts for the front end
      */
-    public function enqueue_styles_and_scripts() {
-        wp_enqueue_style('timeline-item-style', plugin_dir_url(__DIR__) . '/assets/style.css');
+    public function enqueue_styles_and_scripts()
+    {
+        wp_enqueue_style('awtb-item-style', plugin_dir_url(__DIR__) . '/assets/style.css');
     }
 }
 

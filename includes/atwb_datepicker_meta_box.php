@@ -20,24 +20,27 @@ if (!defined('ABSPATH')) {
 /**
  * Class Timeline_Meta_Box
  */
-class Timeline_Meta_Box {
+class Timeline_Meta_Box
+{
 
     /**
      * Initialize the class
      */
-    public function __construct() {
-        add_action('add_meta_boxes', array($this, 'add_date_meta_box'));
-        add_action('save_post', array($this, 'save_date_metabox'));
+    public function __construct()
+    {
+        add_action('add_meta_boxes', array($this, 'atwb_add_date_meta_box'));
+        add_action('save_post', array($this, 'atwb_save_date_metabox'));
     }
 
     /**
      * Add custom meta box for Timeline
      */
-    public function add_date_meta_box() {
+    public function atwb_add_date_meta_box()
+    {
         add_meta_box(
             'timeline_date_metabox',
             'Timeline Date',
-            array($this, 'render_timeline_date_metabox'),
+            array($this, 'atwb_render_date_metabox'),
             _TIMELINE_POST_TYPE, // You can change this to 'page' or a custom post type
             'normal',
             'high'
@@ -49,11 +52,13 @@ class Timeline_Meta_Box {
      *
      * @param mixed $post Post object.
      */
-    public function render_timeline_date_metabox($post) {
+    public function atwb_render_date_metabox($post)
+    {
         // Retrieve the current value of the date from post meta
         $timeline_date = get_post_meta($post->ID, 'timeline_date', true);
         ?>
-        <input type="date" id="timeline_date" class="timeline_input" name="timeline_date" value="<?php echo esc_attr($timeline_date); ?>" />
+        <input type="date" id="timeline_date" class="timeline_input" name="timeline_date"
+            value="<?php echo esc_attr($timeline_date); ?>" />
         <?php
     }
 
@@ -62,7 +67,8 @@ class Timeline_Meta_Box {
      *
      * @param mixed $post_id Post ID.
      */
-    public function save_date_metabox($post_id) {
+    public function atwb_save_date_metabox($post_id)
+    {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }

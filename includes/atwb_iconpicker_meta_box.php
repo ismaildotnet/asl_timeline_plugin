@@ -19,24 +19,27 @@ if (!defined('ABSPATH')) {
 /**
  * Class Timeline_Icon_Meta_Box
  */
-class Timeline_Icon_Meta_Box {
+class Timeline_Icon_Meta_Box
+{
 
     /**
      * Initialize the class
      */
-    public function __construct() {
-        add_action('add_meta_boxes', array($this, 'add_icon_meta_box'));
-        add_action('save_post', array($this, 'save_icon_meta_box'));
+    public function __construct()
+    {
+        add_action('add_meta_boxes', array($this, 'atwb_add_icon_meta_box'));
+        add_action('save_post', array($this, 'atwb_save_icon_meta_box'));
     }
 
     /**
      * Add custom meta box to the edit screen
      */
-    public function add_icon_meta_box() {
+    public function atwb_add_icon_meta_box()
+    {
         add_meta_box(
             'timeline_custom_meta_box',
             'Select Icon',
-            array($this, 'render_custom_meta_box'),
+            array($this, 'atwb_render_custom_meta_box'),
             _TIMELINE_POST_TYPE,
             'normal',
             'default'
@@ -48,18 +51,19 @@ class Timeline_Icon_Meta_Box {
      *
      * @param mixed $post Post object.
      */
-    public function render_custom_meta_box($post) {
+    public function atwb_render_custom_meta_box($post)
+    {
         $timeline_icon = get_post_meta($post->ID, 'timeline_icon', true);
         $all_dashicons = $this->get_all_dashicons();
         ?>
 
         <div class="dashicon-picker-aria">
-            <label id="togglePicker" for="timeline_icon"><span class="dashicons <?php echo esc_attr($timeline_icon); ?>"></span></label>
+            <?php echo wp_kses_post(sprintf('<label id="togglePicker" for="timeline_icon"> <span class="dashicons %s"></span></label> ', esc_attr($timeline_icon))) ?>
             <input name="timeline_icon" id="timeline_icon" type="hidden" value="<?php echo esc_attr($timeline_icon) ?>">
             <div class="icon-picker">
                 <?php
                 foreach ($all_dashicons as $dashicon) {
-                    echo '<span class="dashicons ' . esc_attr($dashicon) . '" data-value="' . esc_attr($dashicon) . '"></span>';
+                    echo wp_kses_post(sprintf('<span class="dashicons %s" data-value="%s"></span>', esc_attr($dashicon), esc_attr($dashicon)));
                 }
                 ?>
             </div>
@@ -71,10 +75,10 @@ class Timeline_Icon_Meta_Box {
                     $(".icon-picker").toggleClass('opend');
                 });
 
-                $(".icon-picker").on('click', 'span.dashicons', function(){
+                $(".icon-picker").on('click', 'span.dashicons', function () {
                     var val = $(this).attr('data-value');
                     $("#timeline_icon").val(val);
-                    $('#togglePicker').find("span").removeClass().addClass("dashicons "+val);
+                    $('#togglePicker').find("span").removeClass().addClass("dashicons " + val);
                     $(this).parent('div.icon-picker').toggleClass('opend');
                 });
             });
@@ -88,7 +92,8 @@ class Timeline_Icon_Meta_Box {
      *
      * @return array Dashicons as an array.
      */
-    public function get_all_dashicons() {
+    public function get_all_dashicons()
+    {
         $dashicons_css = file_get_contents(admin_url('load-styles.php?c=0&dir=ltr&load=dashicons,admin-bar,buttons,media-views,wp-admin,wp-auth-check&ver=' . get_bloginfo('version')));
         preg_match_all('/\.(dashicons-[a-z0-9-]+)/', $dashicons_css, $matches);
 
@@ -100,7 +105,8 @@ class Timeline_Icon_Meta_Box {
      *
      * @param mixed $post_id Post ID.
      */
-    public function save_icon_meta_box($post_id) {
+    public function atwb_save_icon_meta_box($post_id)
+    {
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }

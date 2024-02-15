@@ -36,14 +36,14 @@ function timeline_load_Other_settings()
     foreach ($otherSettings as $field) {
         add_settings_field(
             $field,
-            ucwords(str_replace('_', ' ', $field)),
+            ucwords(str_replace('atwb ', '', str_replace('_', ' ', $field))),
             array($this, 'atwb_Other_Type_callback'),
             'atwb-settings-other', // Specify the page slug here
             'other',
             array('setting_id' => $field)
         );
     }
-    add_settings_field('atwb_ascending_by_timeline_date', 'Timeline Item with assending Order', array($this, 'renderBooleanFieldCallBack'), 'atwb-settings-other', 'other', array('setting_id' => 'atwb_ascending_by_timeline_date'));
+    add_settings_field('atwb_ascending_by_timeline_date', 'Item with assending Order', array($this, 'renderBooleanFieldCallBack'), 'atwb-settings-other', 'other', array('setting_id' => 'atwb_ascending_by_timeline_date'));
 
 }
 /**
@@ -68,7 +68,7 @@ function atwb_Other_Type_callback($args)
     $setting_id = $args['setting_id'];
     $value = get_option($setting_id, '20'); // Default value is '0'
     ?>
-   <input type="number" min="1" required id="<?php esc_attr($setting_id) ?>" name="<?php echo  esc_attr($setting_id)?>" value="<?php echo esc_attr( $value)  ?>" class="timeline_number_input" />
+   <input type="number" min="1" required id="<?php echo esc_attr($setting_id) ?>" name="<?php echo  esc_attr($setting_id)?>" value="<?php echo esc_attr( $value)  ?>" class="timeline_number_input" />
 <?php
 }
 /**

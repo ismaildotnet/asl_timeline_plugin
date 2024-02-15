@@ -52,7 +52,7 @@ class TimelineColorSettings {
         foreach ($colorPicker as $field) {
             add_settings_field(
                 $field,
-                ucwords(str_replace('_', ' ', $field)),
+                ucwords(str_replace('atwb ', '', str_replace('_', ' ', $field))),
                 array($this, 'atwb_renderColorPickerCallback'),
                 'atwb-settings-color',
                 'color',

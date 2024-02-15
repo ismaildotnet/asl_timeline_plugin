@@ -92,8 +92,8 @@ function atwb_animateNumberCallBack($args)
            <?php
         break;
     case 'atwb_item_animate_delay':
-            $value = get_option($setting_id, ''); // Default color
-            ?>
+        $value = get_option($setting_id, ''); ?>
+        <!-- // Default color -->
             <select name="<?php echo esc_attr($setting_id)?>" class="timeline_select">
            <option value="">--select seconds--</option>
            <?php
