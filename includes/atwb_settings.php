@@ -55,7 +55,7 @@ class TimelineSettings
     public function atwb_PluginSettingsPage()
     {
         $allowed_tabs = array('color', 'animation', 'other', 'help');
-        $current_tab = isset($_GET['tab']) ? $_GET['tab'] : 'color';
+        $current_tab = isset($_GET['tab']) ? esc_attr($_GET['tab']) : 'color';
         // If needed, you can still sanitize the value
         $current_tab = htmlspecialchars($current_tab, ENT_QUOTES, 'UTF-8');
         // Validate $current_tab against allowed values
@@ -92,10 +92,10 @@ class TimelineSettings
             </div>
             <?php if ($current_tab !== 'help'): ?>
                 <?php settings_errors(); ?>
-                <form method="post" action="options.php">
+                <form method="post" action="<?php echo admin_url("options.php") ?>">
                     <?php
                     settings_fields('atwb-settings-' . $current_tab);
-                    echo wp_kses_post('<div class="timeline-settings-container">');
+                    echo wp_kses_post('<div class="atwb-settings-container">');
                     do_settings_sections('atwb-settings-' . $current_tab);
                     echo wp_kses_post('</div>');
                     submit_button();

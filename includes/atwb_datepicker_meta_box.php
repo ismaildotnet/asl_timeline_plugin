@@ -41,7 +41,7 @@ class Timeline_Meta_Box
             'timeline_date_metabox',
             'Timeline Date',
             array($this, 'atwb_render_date_metabox'),
-            _TIMELINE_POST_TYPE, // You can change this to 'page' or a custom post type
+            _ATWB_POST_TYPE, // You can change this to 'page' or a custom post type
             'normal',
             'high'
         );
@@ -80,7 +80,7 @@ class Timeline_Meta_Box
 
         // Save the custom date value
         if (isset($_POST['timeline_date'])) {
-            update_post_meta($post_id, 'timeline_date', sanitize_text_field($_POST['timeline_date']));
+            update_post_meta($post_id, 'timeline_date', htmlspecialchars(sanitize_text_field($_POST['timeline_date']), ENT_QUOTES, 'UTF-8'));
         }
     }
 }

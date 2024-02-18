@@ -40,7 +40,7 @@ class Timeline_Icon_Meta_Box
             'timeline_custom_meta_box',
             'Select Icon',
             array($this, 'atwb_render_custom_meta_box'),
-            _TIMELINE_POST_TYPE,
+            _ATWB_POST_TYPE,
             'normal',
             'default'
         );
@@ -116,7 +116,7 @@ class Timeline_Icon_Meta_Box
 
         if (array_intersect($allowed_roles, $current_user->roles)) {
             if (isset($_POST['timeline_icon'])) {
-                update_post_meta($post_id, 'timeline_icon', sanitize_text_field($_POST['timeline_icon']));
+                update_post_meta($post_id, 'timeline_icon', htmlspecialchars(sanitize_text_field($_POST['timeline_icon']), ENT_QUOTES, 'UTF-8'));
             }
         }
     }

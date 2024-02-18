@@ -14,7 +14,7 @@ namespace ATWB\setup;
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-define("_TIMELINE_POST_TYPE", "atwb");
+define("_ATWB_POST_TYPE", "atwb");
 
 class ATWBSetup{
 
@@ -54,10 +54,10 @@ function atwb_Setup_Post_type()
         'public' => true,
         'has_archive' => false,
         'menu_position' => 5,
-        'menu_icon' => TIMELINE_MENU_ICON_PATH,
+        'menu_icon' => ATWB_MENU_ICON_PATH,
         'supports' => array('title', 'editor', 'thumbnail'),
     );
-    register_post_type(_TIMELINE_POST_TYPE, $args);
+    register_post_type(_ATWB_POST_TYPE, $args);
 }
 
 /**

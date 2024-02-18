@@ -338,7 +338,7 @@ module.exports = window["wp"]["i18n"];
   \************************/
 /***/ ((module) => {
 
-module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"alchemy-software-limited/timeline","version":"0.1.0","title":"Timeline block","category":"widgets","icon":"dashicons dashicons-randomize","description":"Create timeline with this block; this is the part of timeline plugin developed by Alchemy Software Limited","example":{},"supports":{"html":false},"textdomain":"timeline","editorScript":"file:./index.js","editorStyle":["file:./index.css","file:./editor.css"],"style":"file:./index.css"}');
+module.exports = JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"alchemy-software-limited/awtb","version":"0.1.0","title":"Timeline block","category":"widgets","icon":"dashicons dashicons-randomize","description":"Create timeline with this block; this is the part of timeline plugin developed by Alchemy Software Limited","example":{},"supports":{"html":false},"textdomain":"timeline","editorScript":"file:./index.js","editorStyle":["file:./index.css","file:./editor.css"],"style":"file:./index.css"}');
 
 /***/ })
 

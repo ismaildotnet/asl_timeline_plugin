@@ -19,25 +19,28 @@
  * Author URI:        https://alchemy-bd.com/
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       TimeLine
+ * Text Domain:       atwb
  * Domain Path:       /languages
  */
 namespace ATWB;
+
 if (!defined('ABSPATH')) {
     exit; // Exit if accessed directly
 }
-define('TIMELINE_PLUGIN_DIR', __DIR__);
-define('TIMELINE_PLUGIN_PATH', __FILE__);
-define('TIMELINE_MENU_ICON_PATH', plugin_dir_url(__FILE__) . '/assets/images/menu-icon.png');
+define('ATWB_PLUGIN_DIR', __DIR__);
+define('ATWB_PLUGIN_PATH', __FILE__);
+define('ATWB_MENU_ICON_PATH', plugin_dir_url(__FILE__) . '/assets/images/menu-icon.png');
 
-class ATWBInitializer{
-    function init(){
-        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_setup.php';
-        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_settings.php';
-        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_enquee.php';
-        require_once TIMELINE_PLUGIN_DIR . '/includes/atwb_shortcode.php';
+class ATWBInitializer
+{
+    function init()
+    {
+        require_once ATWB_PLUGIN_DIR . '/includes/atwb_setup.php';
+        require_once ATWB_PLUGIN_DIR . '/includes/atwb_settings.php';
+        require_once ATWB_PLUGIN_DIR . '/includes/atwb_enquee.php';
+        require_once ATWB_PLUGIN_DIR . '/includes/atwb_shortcode.php';
         add_action('init', array($this, 'atwb_Block'));
-        add_action('enqueue_block_assets', array($this,'atwb_Dash_Icons_For_block'));
+        add_action('enqueue_block_assets', array($this, 'atwb_Dash_Icons_For_block'));
     }
     /**
      * This function register block as timeline
@@ -46,7 +49,7 @@ class ATWBInitializer{
      */
     function atwb_Block()
     {
-        register_block_type(TIMELINE_PLUGIN_DIR . '/blocks');
+        register_block_type(ATWB_PLUGIN_DIR . '/blocks');
     }
 
     /**
@@ -56,11 +59,11 @@ class ATWBInitializer{
      */
     function atwb_Dash_Icons_For_block()
     {
-       try {
-        wp_enqueue_style('dashicons');
-       } catch (\Throwable $th) {
+        try {
+            wp_enqueue_style('dashicons');
+        } catch (\Throwable $th) {
             $message = $th->error_message;
-       }
+        }
     }
 }
 
