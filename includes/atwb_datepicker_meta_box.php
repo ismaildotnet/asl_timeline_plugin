@@ -54,6 +54,8 @@ class Timeline_Meta_Box
      */
     public function atwb_render_date_metabox($post)
     {
+        wp_nonce_field('atwb_date_nonce', 'atwb_date_nonce');
+
         // Retrieve the current value of the date from post meta
         $timeline_date = get_post_meta($post->ID, 'timeline_date', true);
         ?>
@@ -69,6 +71,15 @@ class Timeline_Meta_Box
      */
     public function atwb_save_date_metabox($post_id)
     {
+        // Check if our nonce is set.
+        if (!isset($_POST['atwb_date_nonce'])) {
+            return;
+        }
+        // Verify that the nonce is valid.
+        if (!wp_verify_nonce($_POST['atwb_date_nonce'], 'atwb_date_nonce')) {
+            return;
+        }
+
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }

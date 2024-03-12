@@ -55,6 +55,9 @@ class Timeline_Icon_Meta_Box
     {
         $timeline_icon = get_post_meta($post->ID, 'timeline_icon', true);
         $all_dashicons = $this->get_all_dashicons();
+        // Add a nonce field so we can check for it later.
+        wp_nonce_field('atwb_icon_nonce', 'atwb_icon_nonce');
+
         ?>
 
         <div class="dashicon-picker-aria">
@@ -107,18 +110,28 @@ class Timeline_Icon_Meta_Box
      */
     public function atwb_save_icon_meta_box($post_id)
     {
+        // Check if our nonce is set.
+        if (!isset($_POST['atwb_icon_nonce'])) {
+            return;
+        }
+        // Verify that the nonce is valid.
+        if (!wp_verify_nonce($_POST['atwb_icon_nonce'], 'atwb_icon_nonce')) {
+            return;
+        }
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
             return;
         }
-
-        $allowed_roles = array('editor', 'administrator');
-        $current_user = wp_get_current_user();
-
-        if (array_intersect($allowed_roles, $current_user->roles)) {
-            if (isset($_POST['timeline_icon'])) {
-                update_post_meta($post_id, 'timeline_icon', htmlspecialchars(sanitize_text_field($_POST['timeline_icon']), ENT_QUOTES, 'UTF-8'));
-            }
+        if (!current_user_can('edit_post', $post_id)) {
+            return;
         }
+        if (!isset($_POST['timeline_icon'])) {
+            return;
+        }
+        $iconclass=sanitize_text_field($_POST['timeline_icon']);
+        update_post_meta($post_id, 'timeline_icon', htmlspecialchars($iconclass, ENT_QUOTES, 'UTF-8'));
+
+
+
     }
 }
 

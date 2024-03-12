@@ -55,7 +55,7 @@ class TimelineSettings
     public function atwb_PluginSettingsPage()
     {
         $allowed_tabs = array('color', 'animation', 'other', 'help');
-        $current_tab = isset($_GET['tab']) ? esc_attr($_GET['tab']) : 'color';
+        $current_tab = isset($_GET['tab']) ? esc_attr(sanitize_text_field($_GET['tab'])) : 'color';
         // If needed, you can still sanitize the value
         $current_tab = htmlspecialchars($current_tab, ENT_QUOTES, 'UTF-8');
         // Validate $current_tab against allowed values
