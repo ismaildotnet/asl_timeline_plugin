@@ -1,4 +1,4 @@
-=== Timelinealt ===
+=== Timeline block ===
 Contributors:      The WordPress Contributors
 Tags:              block
 Tested up to:      6.1
@@ -27,29 +27,7 @@ e.g.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
-
-An answer to that question.
-
-= What about foo bar? =
-
-Answer to foo bar dilemma.
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
-
-== Changelog ==
-
-= 0.1.0 =
-* Release
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above. This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation." Arbitrary sections will be shown below the built-in sections outlined above.
+1. can I make change to timline block?
+   Yes! you can change in timeline block, just open in editor run `npm install` make change you want, and then run `npm run build`. now you will see the update while updating or adding timeline via page or post
+2. Is there any dependency to make change to block?
+   Yes, You must need to installed Node on you machine. other package will be installed while you run the command `npm install'
