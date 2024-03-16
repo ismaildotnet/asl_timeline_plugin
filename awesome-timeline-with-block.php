@@ -50,6 +50,13 @@ class ATWBInitializer
     function atwb_Block()
     {
         //register_block_type as gutenberg block
+        /**
+         * To make changes in this block:
+         * Open the blocks folder in your editor and ensure that necessary packages such as Node npm are installed on your machine.
+         * Run the `npm install` command to install all node_modules. node_modules folder will be created
+         * in Edit.js or save.js files inside src folder you can make change what ever you want.
+         * finally execute another command `npm run build`
+         */
         register_block_type(ATWB_PLUGIN_DIR . '/blocks/build');
     }
 
