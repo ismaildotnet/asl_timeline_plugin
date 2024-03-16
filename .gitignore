@@ -12,8 +12,6 @@ coverage
 build/Release
 #build folder
 node_modules/
-block source code/build
-build/
 # Dependency directories
 node_modules/
 

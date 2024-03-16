@@ -49,11 +49,8 @@ class ATWBInitializer
      */
     function atwb_Block()
     {
-        // While Development uncomment the following line
-        //register_block_type(ATWB_PLUGIN_DIR . '/block source code/build');
-        // after run the build command in above directory need to copay the output to blocks folder
-        //after copied then uncomment below line
-        register_block_type(ATWB_PLUGIN_DIR . '/blocks');
+        //register_block_type as gutenberg block
+        register_block_type(ATWB_PLUGIN_DIR . '/blocks/build');
     }
 
     /**

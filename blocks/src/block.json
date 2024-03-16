@@ -1,7 +1,7 @@
 {
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
-	"name": "alchemy-software-limited/awtb",
+	"name": "alchemy-software-limited/atwb",
 	"version": "0.1.0",
 	"title": "Timeline block",
 	"category": "widgets",
@@ -13,14 +13,10 @@
 		"color": {
 			"text": true,
 			"link": true,
-			"background": true,
-			"button": false,
-			"heading": false,
-			"gradients": false,
-			"enableContrastChecker": false
+			"background": true
 		}
 	},
-	"textdomain": "timeline",
+	"textdomain": "atwb",
 	"editorScript": "file:./index.js",
 	"editorStyle": ["file:./index.css", "file:./editor.css"],
 	"style": "file:./index.css"
