@@ -110,12 +110,8 @@ class Timeline_Icon_Meta_Box
      */
     public function atwb_save_icon_meta_box($post_id)
     {
-        // Check if our nonce is set.
-        if (!isset($_POST['atwb_icon_nonce'])) {
-            return;
-        }
         // Verify that the nonce is valid.
-        if (!wp_verify_nonce($_POST['atwb_icon_nonce'], 'atwb_icon_nonce')) {
+        if (!isset ($_POST['atwb_icon_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['atwb_icon_nonce'], 'atwb_icon_nonce')))) {
             return;
         }
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
@@ -124,10 +120,10 @@ class Timeline_Icon_Meta_Box
         if (!current_user_can('edit_post', $post_id)) {
             return;
         }
-        if (!isset($_POST['timeline_icon'])) {
+        if (!isset ($_POST['timeline_icon'])) {
             return;
         }
-        $iconclass=sanitize_text_field($_POST['timeline_icon']);
+        $iconclass = sanitize_text_field($_POST['timeline_icon']);
         update_post_meta($post_id, 'timeline_icon', htmlspecialchars($iconclass, ENT_QUOTES, 'UTF-8'));
 
 

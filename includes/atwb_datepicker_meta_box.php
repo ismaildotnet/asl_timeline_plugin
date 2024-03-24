@@ -71,12 +71,9 @@ class Timeline_Meta_Box
      */
     public function atwb_save_date_metabox($post_id)
     {
-        // Check if our nonce is set.
-        if (!isset($_POST['atwb_date_nonce'])) {
-            return;
-        }
+
         // Verify that the nonce is valid.
-        if (!wp_verify_nonce($_POST['atwb_date_nonce'], 'atwb_date_nonce')) {
+        if (!isset ($_POST['atwb_date_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['atwb_date_nonce'])), 'atwb_date_nonce')) {
             return;
         }
 
@@ -90,7 +87,7 @@ class Timeline_Meta_Box
         }
 
         // Save the custom date value
-        if (isset($_POST['timeline_date'])) {
+        if (isset ($_POST['timeline_date'])) {
             update_post_meta($post_id, 'timeline_date', htmlspecialchars(sanitize_text_field($_POST['timeline_date']), ENT_QUOTES, 'UTF-8'));
         }
     }
