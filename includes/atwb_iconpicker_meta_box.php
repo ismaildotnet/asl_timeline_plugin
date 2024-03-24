@@ -111,7 +111,7 @@ class Timeline_Icon_Meta_Box
     public function atwb_save_icon_meta_box($post_id)
     {
         // Verify that the nonce is valid.
-        if (!isset ($_POST['atwb_icon_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['atwb_icon_nonce'], 'atwb_icon_nonce')))) {
+        if (!isset ($_POST['atwb_icon_nonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['atwb_icon_nonce'])), 'atwb_icon_nonce')) {
             return;
         }
         if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
